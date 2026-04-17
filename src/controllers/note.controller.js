@@ -1,5 +1,4 @@
 import Note from "../models/note.model.js";
-
 export const createNote = async (req, res) => {
   try {
     const { title, content, category, isPinned } = req.body;
@@ -56,6 +55,27 @@ export const createNotesBulk = async (req, res) => {
       success: true,
       message: `${createdNotes.length} notes created successfully`,
       data: createdNotes,
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+      data: null,
+    });
+  }
+};
+
+
+
+export const getAllNotes = async (req, res) => {
+  try {
+    const notes = await Note.find().sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      message: "Notes fetched successfully",
+      data: notes,
     });
 
   } catch (error) {
