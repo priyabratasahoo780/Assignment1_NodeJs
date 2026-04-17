@@ -131,3 +131,62 @@ export const getNoteById = async (req, res) => {
     });
   }
 };
+
+
+
+export const replaceNote = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, content, category, isPinned } = req.body;
+
+    // ❗ Validate ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid note ID",
+        data: null,
+      });
+    }
+
+    // ❗ Validate required fields (PUT requires ALL)
+    if (!title || !content) {
+      return res.status(400).json({
+        success: false,
+        message: "Title and content are required",
+        data: null,
+      });
+    }
+
+    const updatedNote = await Note.findByIdAndUpdate(
+      id,
+      { title, content, category, isPinned },
+      {
+        new: true,
+        overwrite: true,
+        runValidators: true,
+      }
+    );
+
+    // ❗ Not found
+    if (!updatedNote) {
+      return res.status(404).json({
+        success: false,
+        message: "Note not found",
+        data: null,
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Note replaced successfully",
+      data: updatedNote,
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+      data: null,
+    });
+  }
+};
