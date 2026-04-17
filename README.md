@@ -139,7 +139,8 @@ This API implements the semantic difference between these two methods:
 
 **Priyabrata Sahoo**
 - 🌍 GitHub: [@priyabratasahoo780](https://github.com/priyabratasahoo780)
-- 🚀 Portfolio: [Your Portfolio Link Here]
+- 🚀 Live Backend: [https://assignment1-nodejs-nl6x.onrender.com](https://assignment1-nodejs-nl6x.onrender.com)
+- 📝 GitHub Repository: [https://github.com/priyabratasahoo780/Assignment1_NodeJs](https://github.com/priyabratasahoo780/Assignment1_NodeJs)
 
 ---
 
